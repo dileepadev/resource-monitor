@@ -31,16 +31,27 @@ class ResourceMonitorIndicator extends PanelMenu.Button {
         super._init(0.0, _('Resource Monitor'));
 
         this._layout = new St.BoxLayout({
-             style_class: 'panel-status-menu-box',
+             style_class: 'panel-status-menu-box resource-monitor-box',
         });
         
-        this._label = new St.Label({
-            text: 'Loading...',
-            y_align: Clutter.ActorAlign.CENTER,
-            style_class: 'resource-monitor-label'
-        });
+        // Add spacing manually since CSS property might be unsupported
+        this._layout.set_style('spacing: 3px;');
+        
+        // CPU
+        this._cpuItem = this._createItem('utilities-system-monitor-symbolic');
+        this._layout.add_child(this._cpuItem.box);
 
-        this._layout.add_child(this._label);
+        // RAM
+        this._ramItem = this._createItem('drive-harddisk-solidstate-symbolic');
+        this._layout.add_child(this._ramItem.box);
+
+        // Network
+        this._downItem = this._createItem('go-down-symbolic');
+        this._layout.add_child(this._downItem.box);
+        
+        this._upItem = this._createItem('go-up-symbolic');
+        this._layout.add_child(this._upItem.box);
+
         this.add_child(this._layout);
 
         // Initialize previous stats
@@ -64,18 +75,42 @@ class ResourceMonitorIndicator extends PanelMenu.Button {
         });
     }
 
+    _createItem(iconName) {
+        let box = new St.BoxLayout({ style_class: 'resource-monitor-item' });
+        // Add spacing manually since CSS property might be unsupported
+        box.set_style('spacing: 1px;');
+        
+        let icon = new St.Icon({
+            icon_name: iconName,
+            style_class: 'system-status-icon'
+        });
+        let label = new St.Label({
+            text: '...',
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        
+        box.add_child(icon);
+        box.add_child(label);
+        
+        return { box, label };
+    }
+
     _update() {
         const cpuUsage = this._getCPUUsage();
         const ramUsage = this._getRAMUsage();
         const netUsage = this._getNetworkUsage();
         
-        let textParts = [];
-        if (cpuUsage !== null) textParts.push(`CPU: ${cpuUsage.toFixed(1)}%`);
-        if (ramUsage !== null) textParts.push(`RAM: ${ramUsage.toFixed(1)}%`);
-        if (netUsage !== null) textParts.push(`D: ${this._formatSpeed(netUsage.recvRate)} | U: ${this._formatSpeed(netUsage.sentRate)}`);
-
-        if (textParts.length > 0) {
-            this._label.set_text(textParts.join(' | '));
+        if (cpuUsage !== null) {
+            this._cpuItem.label.set_text(`${cpuUsage.toFixed(1)}%`);
+        }
+        
+        if (ramUsage !== null) {
+            this._ramItem.label.set_text(`${ramUsage.toFixed(1)}%`);
+        }
+        
+        if (netUsage !== null) {
+            this._downItem.label.set_text(this._formatSpeed(netUsage.recvRate));
+            this._upItem.label.set_text(this._formatSpeed(netUsage.sentRate));
         }
     }
 
