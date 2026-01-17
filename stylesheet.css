@@ -1,1 +1,5 @@
 /* Add your custom extension styling here */
+
+.resource-monitor-label {
+    margin: 0 5px;
+}
