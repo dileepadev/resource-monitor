@@ -6,6 +6,15 @@
 top-bar-resource-monitor@dileepa.dev
 ```
 
+## 0. Installation for Development
+
+Run this from the repository root to install the extension for development (symlink):
+
+```bash
+mkdir -p ~/.local/share/gnome-shell/extensions
+ln -s "$PWD" ~/.local/share/gnome-shell/extensions/top-bar-resource-monitor@dileepa.dev
+```
+
 ## 1. Confirm the Extension Is Installed
 
 List all installed extensions:
