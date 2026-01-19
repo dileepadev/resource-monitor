@@ -4,5 +4,7 @@
   "uuid": "resource-monitor@dileepa.dev",
   "shell-version": [
     "46"
-  ]
+  ],
+  "version": 1,
+  "url": "https://github.com/dileepadev/resource-monitor"
 }

@@ -22,7 +22,8 @@ Metadata
 1. **Clone the repository** directly into your local extensions directory:
 
    ```bash
-   git clone https://github.com/dileepadev/resource-monitor.git ~/.local/share/gnome-shell/extensions/resource-monitor@dileepa.dev
+   git clone https://github.com/dileepadev/resource-monitor.git \ 
+   ~/.local/share/gnome-shell/extensions/resource-monitor@dileepa.dev
    ```
 
 2. **Restart GNOME Shell** in order to reload the extensions:
@@ -34,3 +35,6 @@ Metadata
    ```bash
    gnome-extensions enable resource-monitor@dileepa.dev
    ```
+
+>[!NOTE]
+> Read [`docs/DEVELOPMENT.md`](./docs/DEVELOPMENT.md) for development guidelines.
