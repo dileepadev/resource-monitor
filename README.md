@@ -42,5 +42,9 @@ Shows the real‑time usage in the GNOME top bar like CPU, RAM, network (downloa
    gnome-extensions enable resource-monitor@dileepa.dev
    ```
 
+## Credits
+
+- Icons: <https://gitlab.gnome.org/World/design/icon-library>
+
 >[!NOTE]
 > Read [`docs/DEVELOPMENT.md`](./docs/DEVELOPMENT.md) for development guidelines.
